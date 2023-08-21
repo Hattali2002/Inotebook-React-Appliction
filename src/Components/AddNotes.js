@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import {Form,Button} from 'react-bootstrap'
 import NotesContext from '../context/notes/NotesContext'
 
-export default function AddNotes() {
+export default function AddNotes(props) {
     const context=useContext(NotesContext);
     const [notes,setNotes]=useState({
         title:"",
@@ -17,12 +17,19 @@ export default function AddNotes() {
     }
     const onClickHandler=(event)=>{
         event.preventDefault(); 
-        context.addNote(notes.title,notes.description,notes.tag);
-        setNotes({
-            title:"",
-            description:"",
-            tag:""
-        });
+        const token=localStorage.getItem('token');
+        if(token){
+            context.addNote(notes.title,notes.description,notes.tag);
+            setNotes({
+                title:"",
+                description:"",
+                tag:""
+            });
+            props.showAlert("Success","Notes added successfully")
+        }
+        else{
+            props.showAlert("UnAuthorized","Please login before adding notes")
+        }
     }
     return (
         <div className="container my-5">

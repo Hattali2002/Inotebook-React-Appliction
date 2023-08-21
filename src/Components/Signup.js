@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 
-export default function Signup() {
+export default function Signup(props) {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -21,7 +21,6 @@ export default function Signup() {
 
   const onClickHandler = async (event) => {
     event.preventDefault();
-    console.log(data);
     let response = await fetch(process.env.REACT_APP_SIGNUP_USER, {
       method: 'POST',
       headers: {
@@ -32,6 +31,10 @@ export default function Signup() {
     let parsedata = await response.json();
     if (parsedata.message === "Registered Successfully") {
       navigate("/login");
+      props.showAlert("success", "Account created successfully");
+    }
+    else{  
+      props.showAlert("Failed","Please enter valid email and password");
     }
   }
 

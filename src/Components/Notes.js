@@ -5,7 +5,7 @@ import NotesItem from './NotesItem';
 import AddNotes from './AddNotes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Notes() {
+export default function Notes(props) {
     const context = useContext(NotesContext);
     const { notes, fetchData } = context;
 
@@ -44,11 +44,12 @@ export default function Notes() {
             description: "",
             tag: ""
         });
+        props.showAlert("success","Notes updated successfully")
         toggleModal();
     }
     return (
         <>
-            <AddNotes />
+            <AddNotes showAlert={props.showAlert}/>
             <Modal
                 show={modalVisible}
                 onHide={toggleModal}
@@ -84,8 +85,8 @@ export default function Notes() {
 
             <div className="container">
                 <div className='row'>
-                    {notes.length > 0 && notes.map((element, index) => {
-                        return <NotesItem key={index} toggleModal={toggleModal} setUpNotes={setUpdateNotes} element={element} />
+                    {notes && notes.map((element, index) => {
+                        return <NotesItem key={index} toggleModal={toggleModal} showAlert={props.showAlert} setUpNotes={setUpdateNotes} element={element} />
                     })}
                 </div>
             </div>

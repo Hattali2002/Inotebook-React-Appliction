@@ -1,17 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
-import NotesContext from '../context/notes/NotesContext'
 
-export default function Login() {
+export default function Login(props) {
     const [data, setData] = useState({
         email: "",
         password: ""
     });
-
-    const context = useContext(NotesContext);
-
-    const { setToken } = context;
 
     let navigate = useNavigate();
 
@@ -40,10 +35,11 @@ export default function Login() {
 
             if (parsedata.token) { 
                 localStorage.setItem('token', parsedata.token);
-                setToken(parsedata.token);
+                props.showAlert("Success","Logged In Successfully");
                 navigate("/home"); 
-            } else {
-                alert("Please enter valid credentials");
+            } 
+            else {
+                props.showAlert("Success","Please enter valid credentials") ;
             }
         }
         catch (Error) {

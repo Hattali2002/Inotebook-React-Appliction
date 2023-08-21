@@ -7,6 +7,7 @@ export default function NotesItem(props) {
     const { element, setUpNotes, toggleModal } = props
     const deleteHandler = (id) => {
         context.deleteNote(id);
+        props.showAlert("success","Notes deleted successfully")
     }
     const editHandler = (id, title, description, tag) => {
         toggleModal();

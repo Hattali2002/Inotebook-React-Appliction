@@ -1,15 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Navbar, Nav, Container, ButtonGroup, Button } from 'react-bootstrap';
-import { useLocation, useNavigate} from 'react-router-dom';
-import NotesContext from '../context/notes/NotesContext';
+import { useLocation, useNavigate} from 'react-router-dom'; 
 
 export default function NavbarComp() {
-    const context=useContext(NotesContext);
-    const {token,setToken}=context;
+    const token=localStorage.getItem('token'); 
     let location = useLocation();
     const navigate=useNavigate();
     const onclickHandler=()=>{
-        setToken("");
+        localStorage.removeItem('token');
         navigate("/login");
     }
     return (
@@ -25,9 +23,9 @@ export default function NavbarComp() {
                     </Nav>
                 </Navbar.Collapse>
                 <ButtonGroup aria-label="Third group" size="sm">
-                    <Button as="a" className={`me-2 ${token!==""?"d-none":""}`} href="login">Login</Button>
-                    <Button as="a" className={`me-2 ${token!==""?"d-none":""}`} href="signup">SignUp</Button>
-                    <Button as="a" className={`me-2 ${token!==""?"":"d-none"}`} href="signup" onClick={onclickHandler}>LogOut</Button>
+                    <Button as="a" className={`me-2 ${token!==null?"d-none":""}`} href="login">Login</Button>
+                    <Button as="a" className={`me-2 ${token!==null?"d-none":""}`} href="signup">SignUp</Button>
+                    <Button as="a" className={`me-2 ${token!==null?"":"d-none"}`} href="signup" onClick={onclickHandler}>LogOut</Button>
                 </ButtonGroup>
             </Container>
         </Navbar>
