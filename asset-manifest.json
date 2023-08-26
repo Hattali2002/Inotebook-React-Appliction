@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Inotebook-React-Appliction/static/css/main.da3089f3.css",
+    "main.js": "/Inotebook-React-Appliction/static/js/main.1d23b8ba.js",
+    "index.html": "/Inotebook-React-Appliction/index.html",
+    "main.da3089f3.css.map": "/Inotebook-React-Appliction/static/css/main.da3089f3.css.map",
+    "main.1d23b8ba.js.map": "/Inotebook-React-Appliction/static/js/main.1d23b8ba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da3089f3.css",
+    "static/js/main.1d23b8ba.js"
+  ]
+}
